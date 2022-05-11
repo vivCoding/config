@@ -1,0 +1,67 @@
+Xcursor.theme: Qogir
+Xcursor.size: 16
+
+!! Colorscheme
+
+!! special
+*.foreground:   #abb2bf
+*.background:   #1d1f21
+*.cursorColor:  #abb2bf
+
+!! black
+*.color0:       #1e2229
+*.color8:       #7f8c8d
+
+!! red
+*.color1:       #ed1515
+*.color9:       #c0392b
+
+!! green
+*.color2:       #44853a
+*.color10:      #80f96d
+
+!! yellow
+*.color3:       #f67400
+*.color11:      #fdbc4b
+
+!! blue
+*.color4:       #1d99f3
+*.color12:      #96b6e9
+
+!! magenta
+*.color5:       #9b59b6
+*.color13:      #8e44ad
+
+!! cyan
+*.color6:       #1abc9c
+*.color14:      #16a085
+
+!! white
+*.color7:       #fcfcfc
+*.color15:      #ffffff
+
+!! other apperance stuff
+URxvt.font: xft:CaskaydiaCove Nerd Font Mono:autohint=true:size=10
+!! URxvt.boldFont: xft:CaskaydiaCove Nerd Font Mono:autohint=true:size=10
+!! URxvt.italicFont: xft:CaskaydiaCove Nerd Font Mono:autohint=true:size=10
+!! URxvt.boldItalicFont: xft:CaskaydiaCove Nerd Font Mono:autohint=true:size=10
+Xft.antialias: true
+!! Xft.rgba: rgb
+!! Xft.hinting: true
+!! Xft.hintstyle: hintmedium
+!! *.letterSpace: 0.5
+URxvt.scrollBar: false
+Urxvt.scrollBar_right: false
+URxvt.urgentOnBell: true
+URxvt.transparent: true
+URxvt.shading: 35
+URxvt.internalBorder: 10
+
+!! Extensions
+URxvt.perl-ext-common: default,clipboard,url-select,keyboard-select
+!! Disable ISO 14755 for ctrl+shift keys
+URxvt.iso14755:    false
+URxvt.iso14755_52: false
+!! New copy pasta keys
+URxvt.keysym.C-S-0x43: eval:selection_to_clipboard
+URxvt.keysym.C-S-0x56: eval:paste_clipboard

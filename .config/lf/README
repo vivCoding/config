@@ -1,0 +1,12 @@
+# lf config
+
+A lot of the config is borrowed/copied from [LukeSmithxyz](https://github.com/LukeSmithxyz/voidrice/blob/master/.config/lf/lfrc)
+
+### Setting up image previews
+
+I use two different previewers based on whether user wants to preview images on it. For the image preview:
+ 1. ueberzug must be installed.
+ 2. The img_pv file (~/.config/lf/img_pv.sh for me), must have a command similar to mine to generate ueberzug images.
+ 3. A `set cleaner` line as below is a cleaner script.
+ 4. lf should be started through a wrapper script (~/.local/bin/lfub for me) that creates the environment for ueberzug. This command can be be aliased in your shellrc (`alias lf="lfub") or if set to a binding, should be called directly instead of normal lf.
+

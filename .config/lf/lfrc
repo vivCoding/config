@@ -1,0 +1,54 @@
+set shell bash
+set shellopts '-eu'
+set info size:time
+set ifs "\n"
+set cleaner '~/.config/lf/cleaner.sh'
+set previewer '~/.config/lf/img_pv.sh'
+
+cmd open ${{
+    set -f
+    case $(file --mime-type "$(readlink -f $f)" -b) in
+        text/* | application/json | inode/x-empty) $EDITOR $fx ;;
+        audio/* | video/* ) setsid -f vlc $fx >/dev/null 2>&1 ;;
+        image/x-xcf) setsid -f gimp $fx >/dev/null 2>&1 ;;
+        image/svg+xml) display -- $fx ;;
+        image/*) setsid -f sxiv -a $fx ;; 
+        * ) for f in $fx; do setsid -f $OPENER $f > /dev/null 2> /dev/null & done ;;
+    esac
+}}
+
+cmd extract ${{
+    set -f
+	# tput cup $(($(tput lines)/3))
+    tput bold
+	printf "extract '%s' ? [y/N] " "$fx"
+	read ans
+	[[ $ans = "y" ]] && aunpack "$fx" || exit 0
+}}
+
+cmd help ${{
+    $PAGER '/home/vuser/.config/lf/README'
+}} 
+
+cmd togglePreview :{{
+    set previewer '~/.config/lf/pv.sh'
+    redraw
+    echo "Using detailed-info previewer (with mediainfo)"
+}}
+
+cmd toggleImgPreview :{{
+    set previewer '~/.config/lf/img_pv.sh'
+    redraw
+    echo "Using image previewer (with ueberzug)"
+}}
+
+map <backspace> set hidden! # ctrl-h
+map D delete
+map E extract
+map w
+map S $$SHELL
+map f search
+# map P stuff
+map P toggleImgPreview
+map M togglePreview
+

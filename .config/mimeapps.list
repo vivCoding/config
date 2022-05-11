@@ -1,0 +1,9 @@
+[Default Applications]
+
+# xdg-open will use these settings to determine how to open filetypes.
+
+application/pdf=org.kde.okular.desktop
+
+text/plain=lvim.desktop
+text/x-shellscript=lvim.desktop;
+

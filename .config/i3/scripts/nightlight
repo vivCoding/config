@@ -1,0 +1,25 @@
+#!/bin/fish
+
+set NORMAL 6500
+set STEP 1000
+
+function reset
+    set -Ux REDSHIFT_TEMP $NORMAL
+    redshift -P -O $REDSHIFT_TEMP > /dev/null 2> /dev/null
+end
+
+switch $BLOCK_BUTTON
+    case 1
+        # left click
+        reset
+    case 4
+        # scroll up
+        set -Ux REDSHIFT_TEMP (math $REDSHIFT_TEMP + $STEP)
+        redshift -P -O $REDSHIFT_TEMP > /dev/null 2> /dev/null
+    case 5
+        # scroll down
+        set -Ux REDSHIFT_TEMP (math $REDSHIFT_TEMP - $STEP)
+        redshift -P -O $REDSHIFT_TEMP > /dev/null 2> /dev/null
+end
+ 
+echo "<span font_size=\"14pt\" rise=\"-1pt\"></span>" $REDSHIFT_TEMP"K"
