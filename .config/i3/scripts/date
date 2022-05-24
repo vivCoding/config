@@ -1,0 +1,9 @@
+#!/bin/fish
+
+switch $BLOCK_BUTTON
+    case 1
+        # left click
+        gsimplecal
+end
+
+date '+%a %D   %I:%M %p'

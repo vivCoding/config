@@ -42,13 +42,15 @@ cmd toggleImgPreview :{{
     echo "Using image previewer (with ueberzug)"
 }}
 
+map H set hidden!
 map <backspace> set hidden! # ctrl-h
 map D delete
 map E extract
 map w
 map S $$SHELL
 map f search
-# map P stuff
 map P toggleImgPreview
 map M togglePreview
-
+map C ${{
+    code $PWD
+}}

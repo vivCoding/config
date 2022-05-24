@@ -67,3 +67,7 @@ END {
 	}
 }
 ' /proc/meminfo
+
+case $BLOCK_BUTTON in
+  1) urxvt -e htop %u ;;  
+esac
