@@ -1,0 +1,5 @@
+require('packer_init')
+require('plugins')
+require('mappings')
+require('appearance')
+require('settings')

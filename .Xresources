@@ -41,27 +41,39 @@ Xcursor.size: 16
 *.color15:      #ffffff
 
 !! other apperance stuff
-URxvt.font: xft:CaskaydiaCove Nerd Font Mono:autohint=true:size=10
-!! URxvt.boldFont: xft:CaskaydiaCove Nerd Font Mono:autohint=true:size=10
-!! URxvt.italicFont: xft:CaskaydiaCove Nerd Font Mono:autohint=true:size=10
-!! URxvt.boldItalicFont: xft:CaskaydiaCove Nerd Font Mono:autohint=true:size=10
+URxvt.font: xft:DejaVuSansMono Nerd Font Mono:autohint=true:size=10
+! URxvt.font: xft:CaskaydiaCove Nerd Font:autohint=true:size=10,xft:DejaVuSansMono Nerd Font:autohint=true:size=10
+! URxvt.font: xft:CaskaydiaCove Nerd Font Mono:autohint=true:size=10
+! Urxvt.font: xft:Hack:size=10
 Xft.antialias: true
-!! Xft.rgba: rgb
-!! Xft.hinting: true
-!! Xft.hintstyle: hintmedium
-!! *.letterSpace: 0.5
+! Xft.rgba: rgb
+! Xft.hinting: true
+! Xft.hintstyle: hintmedium
+URxvt.letterSpace: -1
 URxvt.scrollBar: false
 Urxvt.scrollBar_right: false
 URxvt.urgentOnBell: true
+!! transparent
 URxvt.transparent: true
 URxvt.shading: 35
 URxvt.internalBorder: 10
 
-!! Extensions
-URxvt.perl-ext-common: default,clipboard,url-select,keyboard-select
 !! Disable ISO 14755 for ctrl+shift keys
-URxvt.iso14755:    false
+URxvt.iso14755: false
 URxvt.iso14755_52: false
-!! New copy pasta keys
+!! New copypasta keys 
 URxvt.keysym.C-S-0x43: eval:selection_to_clipboard
 URxvt.keysym.C-S-0x56: eval:paste_clipboard
+ 
+!! Extensions
+URxvt.perl-ext-common: default,matcher,keyboard-select,font-size
+!! matcher (click on urls)
+URxvt.url-launcher: /usr/bin/xdg-open
+URxvt.matcher.button: C-1
+!! keyboard-select (vim mode)
+URxvt.keysym.M-Escape: keyboard-select:activate
+URxvt.keyboard-select.clipboard: true
+!! zoom in/out (font resize)
+URxvt.keysym.C-0x2D: font-size:decrease
+URxvt.keysym.C-0x3D: font-size:increase
+URxvt.keysym.C-0x30: font-size:reset
