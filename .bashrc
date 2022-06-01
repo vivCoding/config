@@ -85,3 +85,5 @@ _open_files_for_editing() {
 # alias pacdiff=eos-pacdiff
 ################################################################################
 
+# prettify bash prompt
+PS1="\e[0;32m[$USER@`shorthostname` \e[0;37m\W\e[0;32m]$\e[0;38m "
