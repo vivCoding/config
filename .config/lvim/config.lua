@@ -10,8 +10,9 @@ an executable
 
 -- general
 lvim.log.level = "warn"
-lvim.format_on_save = true
+lvim.format_on_save = false
 lvim.colorscheme = "onedarker"
+lvim.transparent_window = true
 -- to disable icons and use a minimalist setup, uncomment the following
 -- lvim.use_icons = false
 
@@ -19,67 +20,87 @@ lvim.colorscheme = "onedarker"
 lvim.leader = "space"
 -- add your own keymapping
 lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
+lvim.keys.normal_mode["<S-Left>"] = ":BufferLineMovePrev<cr>"
+lvim.keys.normal_mode["<S-Right>"] = ":BufferLineMoveNext<cr>"
+
+-- disable copying when changing or cutting
+lvim.keys.normal_mode["c"] = { '"_c', noremap = true }
+lvim.keys.normal_mode["C"] = { '"_C', noremap = true }
+lvim.keys.normal_mode["x"] = { '"_x', noremap = true }
+-- lvim.keys.normal_mode["d"] = { '"_d', noremap = true }
+-- lvim.keys.normal_mode["D"] = { '"_D', noremap = true }
+
+lvim.keys.visual_mode["c"] = { '"_c', noremap = true }
+lvim.keys.visual_mode["C"] = { '"_C', noremap = true }
+lvim.keys.visual_mode["x"] = { '"_x', noremap = true }
+-- lvim.keys.normal_mode["d"] = { '"_d', noremap = true }
+-- lvim.keys.visual_mode["D"] = { '"_D', noremap = true }
+
 -- unmap a default keymapping
--- lvim.keys.normal_mode["<C-Up>"] = false
--- edit a default keymapping
--- lvim.keys.normal_mode["<C-q>"] = ":q<cr>"
+-- vim.keymap.del("n", "<C-Up>")
+-- override a default keymapping
+-- lvim.keys.normal_mode["<C-q>"] = ":q<cr>" -- or vim.keymap.set("n", "<C-q>", ":q<cr>" )
 
 -- Change Telescope navigation to use j and k for navigation and n and p for history in both input and normal mode.
 -- we use protected-mode (pcall) just in case the plugin wasn't loaded yet.
--- local _, actions = pcall(require, "telescope.actions")
--- lvim.builtin.telescope.defaults.mappings = {
---   -- for input mode
---   i = {
---     ["<C-j>"] = actions.move_selection_next,
---     ["<C-k>"] = actions.move_selection_previous,
---     ["<C-n>"] = actions.cycle_history_next,
---     ["<C-p>"] = actions.cycle_history_prev,
---   },
---   -- for normal mode
---   n = {
---     ["<C-j>"] = actions.move_selection_next,
---     ["<C-k>"] = actions.move_selection_previous,
---   },
--- }
+local _, actions = pcall(require, "telescope.actions")
+lvim.builtin.telescope.defaults.mappings = {
+    -- for input mode
+    i = {
+        ["<C-j>"] = actions.move_selection_next,
+        ["<C-k>"] = actions.move_selection_previous,
+        ["<C-n>"] = actions.cycle_history_next,
+        ["<C-p>"] = actions.cycle_history_prev,
+    },
+    -- for normal mode
+    n = {
+        ["<C-j>"] = actions.move_selection_next,
+        ["<C-k>"] = actions.move_selection_previous,
+    },
+}
 
 -- Use which-key to add extra bindings with the leader-key prefix
--- lvim.builtin.which_key.mappings["P"] = { "<cmd>Telescope projects<CR>", "Projects" }
--- lvim.builtin.which_key.mappings["t"] = {
---   name = "+Trouble",
---   r = { "<cmd>Trouble lsp_references<cr>", "References" },
---   f = { "<cmd>Trouble lsp_definitions<cr>", "Definitions" },
---   d = { "<cmd>Trouble document_diagnostics<cr>", "Diagnostics" },
---   q = { "<cmd>Trouble quickfix<cr>", "QuickFix" },
---   l = { "<cmd>Trouble loclist<cr>", "LocationList" },
---   w = { "<cmd>Trouble workspace_diagnostics<cr>", "Wordspace Diagnostics" },
--- }
-
--- TODO: User Config for predefined plugins
--- After changing plugin config exit and reopen LunarVim, Run :PackerInstall :PackerCompile
-lvim.builtin.alpha.active = true
-lvim.builtin.alpha.mode = "dashboard"
-lvim.builtin.notify.active = true
-lvim.builtin.terminal.active = true
-lvim.builtin.nvimtree.setup.view.side = "left"
-lvim.builtin.nvimtree.show_icons.git = 0
+lvim.builtin.which_key.mappings["o"] = { ":SymbolsOutline<cr>", "Outline" }
+lvim.builtin.which_key.mappings["z"] = { ":set wrap!<cr>", "Word Wrap" }
+lvim.builtin.which_key.mappings["P"] = { "<cmd>Telescope projects<CR>", "Projects" }
+lvim.builtin.which_key.mappings["l"]["p"]["r"] = { ":Telescope lsp_references<cr>", "References" }
+lvim.builtin.which_key.mappings["t"] = {
+    name = "+Trouble",
+    r = { "<cmd>Trouble lsp_references<cr>", "References" },
+    f = { "<cmd>Trouble lsp_definitions<cr>", "Definitions" },
+    d = { "<cmd>Trouble document_diagnostics<cr>", "Diagnostics" },
+    t = { "<cmd>TodoTrouble<cr>", "TODOs" },
+    q = { "<cmd>Trouble quickfix<cr>", "QuickFix" },
+    l = { "<cmd>Trouble loclist<cr>", "LocationList" },
+    w = { "<cmd>Trouble workspace_diagnostics<cr>", "Wordspace Diagnostics" },
+}
+lvim.builtin.which_key.mappings["s"]["t"] = { ":Telescope current_buffer_fuzzy_find<cr>", "Text" }
+lvim.builtin.which_key.mappings["g"]["S"] = { ":Telescope git_status<cr>", "Status" }
 
 -- if you don't want all the parsers change this to a table of the ones you want
 lvim.builtin.treesitter.ensure_installed = {
-    "bash",
-    "c",
-    "javascript",
-    "json",
-    "lua",
-    "python",
-    "typescript",
-    "tsx",
-    "css",
+    'bash',
+    'c',
+    'cpp',
+    'css',
+    'fish',
+    'html',
+    'java',
+    'javascript',
+    'json',
+    'lua',
+    'make',
+    'python',
     "rust",
-    "java",
-    "yaml",
+    'typescript',
+    'tsx',
+    'vim',
+    'vue',
+    'yaml'
+
 }
 
-lvim.builtin.treesitter.ignore_install = { "haskell" }
+-- lvim.builtin.treesitter.ignore_install = { "haskell" }
 lvim.builtin.treesitter.highlight.enabled = true
 
 -- generic LSP settings
@@ -151,18 +172,104 @@ lvim.builtin.treesitter.highlight.enabled = true
 --       cmd = "TroubleToggle",
 --     },
 -- }
+lvim.plugins = {
+    { 'simrat39/symbols-outline.nvim' },
+    {
+        'folke/todo-comments.nvim',
+        requires = "nvim-lua/plenary.nvim",
+    },
+    {
+        "folke/trouble.nvim",
+        requires = "kyazdani42/nvim-web-devicons",
+    }
+}
 
--- Autocommands (https://neovim.io/doc/user/autocmd.html)
--- lvim.autocommands.custom_groups = {
---   { "BufWinEnter", "*.lua", "setlocal ts=8 sw=8" },
--- }
+-- After changing plugin config exit and reopen LunarVim, Run :PackerInstall :PackerCompile
+lvim.builtin.alpha.active = true
+lvim.builtin.alpha.mode = "dashboard"
+
+local version = vim.version()
+local print_version = "v" .. version.major .. '.' .. version.minor .. '.' .. version.patch
+-- using https://texteditor.com/multiline-text-art/
+lvim.builtin.alpha.dashboard.section.header = {
+    type = "text",
+    val = {
+        [[                                                                         ]],
+        [[                                                                         ]],
+        [[  __                                           __     __ __              ]],
+        [[                                                                         ]],
+        [[ |  \                                         |  \   |  \  \             ]],
+        [[ | ▓▓      __    __ _______   ______   ______ | ▓▓   | ▓▓\▓▓______ ____  ]],
+        [[ | ▓▓     |  \  |  \       \ |      \ /      \| ▓▓   | ▓▓  \      \    \ ]],
+        [[ | ▓▓     | ▓▓  | ▓▓ ▓▓▓▓▓▓▓\ \▓▓▓▓▓▓\  ▓▓▓▓▓▓\\▓▓\ /  ▓▓ ▓▓ ▓▓▓▓▓▓\▓▓▓▓\]],
+        [[ | ▓▓     | ▓▓  | ▓▓ ▓▓  | ▓▓/      ▓▓ ▓▓   \▓▓ \▓▓\  ▓▓| ▓▓ ▓▓ | ▓▓ | ▓▓]],
+        [[ | ▓▓_____| ▓▓__/ ▓▓ ▓▓  | ▓▓  ▓▓▓▓▓▓▓ ▓▓        \▓▓ ▓▓ | ▓▓ ▓▓ | ▓▓ | ▓▓]],
+        [[ | ▓▓     \\▓▓    ▓▓ ▓▓  | ▓▓\▓▓    ▓▓ ▓▓         \▓▓▓  | ▓▓ ▓▓ | ▓▓ | ▓▓]],
+        [[  \▓▓▓▓▓▓▓▓ \▓▓▓▓▓▓ \▓▓   \▓▓ \▓▓▓▓▓▓▓\▓▓          \▓    \▓▓\▓▓  \▓▓  \▓▓]],
+        [[                                                                         ]],
+        "                                  " .. print_version,
+        [[                                                                         ]],
+        [[                                                                         ]],
+    },
+    opts = {
+        position = "center",
+        hl = "Label",
+    },
+}
+
+lvim.builtin.notify.active = true
+lvim.builtin.terminal.active = true
+lvim.builtin.nvimtree.setup.view.side = "left"
+-- lvim.builtin.nvimtree.show_icons.git = 0
+-- lualine reconfig
 lvim.builtin.lualine.sections.lualine_a = { "mode" }
 lvim.builtin.lualine.options = {
     section_separators = { left = '', right = '' },
 }
 lvim.builtin.lualine.sections.lualine_z = { "location" }
 lvim.builtin.lualine.inactive_sections.lualine_z = {}
--- vim.opt.relativenumber = true
-vim.opt.shiftwidth = 4
+
+-- symbols outline config
+vim.g.symbols_outline = {
+    auto_preview = false,
+}
+
+require("todo-comments").setup {}
+require("trouble").setup {}
+
+-- Autocommands (https://neovim.io/doc/user/autocmd.html)
+-- vim.api.nvim_create_autocmd("BufEnter", {
+--   pattern = { "*.json", "*.jsonc" },
+--   -- enable wrap mode for json files only
+--   command = "setlocal wrap",
+-- })
+-- vim.api.nvim_create_autocmd("FileType", {
+--   pattern = "zsh",
+--   callback = function()
+--     -- let treesitter use bash highlight for zsh files as well
+--     require("nvim-treesitter.highlight").attach(0, "bash")
+--   end,
+-- })
+
+-- Additional misc settings
+
+-- searching options
+vim.opt.showmatch = true
+vim.opt.ignorecase = true
+vim.opt.hlsearch = true
+vim.opt.incsearch = true
+
+-- indentation
 vim.opt.tabstop = 4
+vim.opt.shiftwidth = 4
+vim.opt.softtabstop = 4
+vim.opt.autoindent = true
+
+-- enable folding by default
+vim.opt.foldenable = true
+vim.opt.foldlevel = 99
+vim.opt.foldmethod = "indent"
+
 vim.opt.clipboard = "unnamedplus"
+vim.opt.mouse = 'a' -- enable mouse click
+vim.opt.termguicolors = true

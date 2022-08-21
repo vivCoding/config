@@ -7,3 +7,4 @@ text/x-shellscript=lvim.desktop;
 
 [Added Associations]
 application/pdf=org.kde.okular.desktop
+image/png=sxiv.desktop;
